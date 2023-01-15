@@ -24,7 +24,7 @@ public class UserWallet extends BaseEntity {
     @JoinColumn(name = "wallet_id")
     Wallet walletRelations;
 
-    @NotNull
+    @NotNull(message = "balance cannot be null")
     @Column(name = "balance")
     Long balance;
 

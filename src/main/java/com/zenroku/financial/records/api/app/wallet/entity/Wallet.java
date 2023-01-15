@@ -19,7 +19,7 @@ import java.util.Collection;
 })
 public class Wallet extends BaseEntity {
 
-    @NotBlank
+    @NotBlank(message = "name cannot be empty")
     @Column(name = "name")
     String name;
 }

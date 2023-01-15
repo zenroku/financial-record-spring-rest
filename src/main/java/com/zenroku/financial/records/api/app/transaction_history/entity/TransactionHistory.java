@@ -3,6 +3,7 @@ package com.zenroku.financial.records.api.app.transaction_history.entity;
 import com.zenroku.financial.records.api.app.user_wallet.entity.UserWallet;
 import com.zenroku.financial.records.api.settings.model.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,8 @@ public class TransactionHistory extends BaseEntity {
     @ManyToOne
     UserWallet userWalletRelations;
 
-    @NotNull
+    @NotBlank
+    @NotBlank(message = "description cannot be empty")
     @Column(name = "description", columnDefinition = "text")
     String description;
 

@@ -3,21 +3,18 @@ package com.zenroku.financial.records.api.app.user.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zenroku.financial.records.api.app.user.entity.User;
 import com.zenroku.financial.records.api.app.user.repository.UserRepository;
+import com.zenroku.financial.records.api.settings.exception.DataNotFoundException;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
-import com.zenroku.financial.records.api.settings.util.DataNotFound;
 import com.zenroku.financial.records.api.settings.util.ValidatorUtil;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -50,38 +47,31 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public BaseResponse update(Long id, User user) {
+    public BaseResponse update(Long id, User user) throws DataNotFoundException {
         BaseResponse response = new BaseResponse();
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isEmpty()){
-            DataNotFound.baseResponse(response,"User",id);
+        User existUser = userRepository.findById(id).orElseThrow(()-> new DataNotFoundException("User not found with id " + id));
+
+        Set<ConstraintViolation<User>> validate = validator.validate(existUser);
+        if (validate.isEmpty()){
+            existUser.setFirstName(existUser.getFirstName());
+            existUser.setLastName(existUser.getLastName());
+            existUser.setEmail(existUser.getEmail());
+            Map<String,Object> mapUser = objectMapper.convertValue(userRepository.save(existUser),Map.class);
+            response.setData(mapUser);
         } else {
-            Set<ConstraintViolation<User>> validate = validator.validate(user);
-            if (validate.isEmpty()){
-                User updatedUser = optionalUser.get();
-                updatedUser.setFirstName(user.getFirstName());
-                updatedUser.setLastName(user.getLastName());
-                updatedUser.setEmail(user.getEmail());
-                Map<String,Object> mapUser = objectMapper.convertValue(userRepository.save(updatedUser),Map.class);
-                response.setData(mapUser);
-            } else {
-                ValidatorUtil.extractMessages(response,validate);
-            }
+            ValidatorUtil.extractMessages(response,validate);
         }
 
         return response;
     }
 
     @Override
-    public BaseResponse getById(Long id) {
+    public BaseResponse getById(Long id) throws DataNotFoundException {
         BaseResponse response = new BaseResponse();
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isEmpty()){
-            DataNotFound.baseResponse(response,"User",id);
-        } else {
-            Map<String,Object> mapUser = objectMapper.convertValue(optionalUser.get(),Map.class);
-            response.setData(mapUser);
-        }
+        User getUser = userRepository.findById(id).orElseThrow(()-> new DataNotFoundException("User Not Found with id " + id));
+        Map<String,Object> mapUser = objectMapper.convertValue(getUser,Map.class);
+        response.setData(mapUser);
+
         return response;
     }
 }

@@ -1,16 +1,11 @@
 package com.zenroku.financial.records.api.app.userwallet.controller;
 
-import com.zenroku.financial.records.api.app.user.entity.User;
 import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
+import com.zenroku.financial.records.api.settings.model.BaseController;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
-import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 
-public interface UserWalletController {
-    BaseResponseArray get();
+public interface UserWalletController extends BaseController {
+    BaseResponse create(UserWallet user) throws Exception;
 
-    BaseResponse create(UserWallet user);
-
-    BaseResponse update(Long id, UserWallet user);
-
-    BaseResponse getById(Long id);
+    BaseResponse update(Long id, UserWallet user) throws Exception;
 }

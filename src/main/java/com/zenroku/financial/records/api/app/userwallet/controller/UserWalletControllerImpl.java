@@ -15,25 +15,25 @@ public class UserWalletControllerImpl implements UserWalletController{
     UserWalletService userWalletService;
     @Override
     @GetMapping
-    public BaseResponseArray get() {
+    public BaseResponseArray get() throws Exception {
         return userWalletService.get();
     }
 
     @Override
     @PostMapping
-    public BaseResponse create(@RequestBody UserWallet userWallet) {
+    public BaseResponse create(@RequestBody UserWallet userWallet) throws Exception {
         return userWalletService.create(userWallet);
     }
 
     @Override
     @PutMapping("/{id}")
-    public BaseResponse update(@PathVariable("id") Long id, @RequestBody UserWallet userWallet) {
+    public BaseResponse update(@PathVariable("id") Long id, @RequestBody UserWallet userWallet) throws Exception {
         return userWalletService.update(id,userWallet);
     }
 
     @Override
     @GetMapping("/{id}")
-    public BaseResponse getById(@PathVariable("id") Long id) {
+    public BaseResponse getById(@PathVariable("id") Long id) throws Exception {
         return userWalletService.getById(id);
     }
 }

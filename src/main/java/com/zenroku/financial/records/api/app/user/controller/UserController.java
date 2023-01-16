@@ -1,15 +1,11 @@
 package com.zenroku.financial.records.api.app.user.controller;
 
 import com.zenroku.financial.records.api.app.user.entity.User;
+import com.zenroku.financial.records.api.settings.model.BaseController;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
-import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 
-public interface UserController {
-    BaseResponseArray get();
+public interface UserController extends BaseController {
+    BaseResponse create(User user) throws Exception;
 
-    BaseResponse create(User user);
-
-    BaseResponse update(Long id, User user);
-
-    BaseResponse getById(Long id);
+    BaseResponse update(Long id, User user) throws Exception;
 }

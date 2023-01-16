@@ -7,9 +7,9 @@ import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 public interface UserWalletService {
     BaseResponseArray get();
 
-    BaseResponse create(UserWallet userWallet);
+    BaseResponse create(UserWallet userWallet) throws Exception;
 
-    BaseResponse update(Long id, UserWallet userWallet);
+    BaseResponse update(Long id, UserWallet userWallet) throws Exception;
 
-    BaseResponse getById(Long id);
+    BaseResponse getById(Long id) throws Exception;
 }

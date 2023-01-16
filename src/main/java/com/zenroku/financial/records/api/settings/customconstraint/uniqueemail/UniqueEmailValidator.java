@@ -1,7 +1,7 @@
-package com.zenroku.financial.records.api.settings.customconstraint.validator;
+package com.zenroku.financial.records.api.settings.customconstraint.uniqueemail;
 
 import com.zenroku.financial.records.api.app.user.repository.UserRepository;
-import com.zenroku.financial.records.api.settings.customconstraint.annotation.UniqueEmail;
+import com.zenroku.financial.records.api.settings.customconstraint.uniqueemail.UniqueEmail;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;

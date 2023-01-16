@@ -5,6 +5,8 @@ import com.zenroku.financial.records.api.app.user.entity.User;
 import com.zenroku.financial.records.api.app.user.repository.UserRepository;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
+import com.zenroku.financial.records.api.settings.util.DataNotFound;
+import com.zenroku.financial.records.api.settings.util.ValidatorUtil;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService{
             Map<String,Object> mapUser = objectMapper.convertValue(userRepository.save(user),Map.class);
             response.setData(mapUser);
         } else {
-            validatedBaseResponse(response,validate);
+            ValidatorUtil.extractMessages(response,validate);
         }
         return response;
     }
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserService{
         BaseResponse response = new BaseResponse();
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()){
-            userNotFound(response,id);
+            DataNotFound.baseResponse(response,"User",id);
         } else {
             Set<ConstraintViolation<User>> validate = validator.validate(user);
             if (validate.isEmpty()){
@@ -63,7 +65,7 @@ public class UserServiceImpl implements UserService{
                 Map<String,Object> mapUser = objectMapper.convertValue(userRepository.save(updatedUser),Map.class);
                 response.setData(mapUser);
             } else {
-                validatedBaseResponse(response,validate);
+                ValidatorUtil.extractMessages(response,validate);
             }
         }
 
@@ -75,23 +77,11 @@ public class UserServiceImpl implements UserService{
         BaseResponse response = new BaseResponse();
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()){
-            userNotFound(response,id);
+            DataNotFound.baseResponse(response,"User",id);
         } else {
             Map<String,Object> mapUser = objectMapper.convertValue(optionalUser.get(),Map.class);
             response.setData(mapUser);
         }
         return response;
-    }
-
-    void validatedBaseResponse(BaseResponse response, Set<ConstraintViolation<User>> validate){
-        response.setSuccess(false);
-        response.setStatus(HttpStatus.BAD_REQUEST.value());
-        response.setMessage(validate.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(",")));
-    }
-
-    void userNotFound(BaseResponse response, Long id){
-        response.setSuccess(false);
-        response.setMessage("User not found with id " + id);
-        response.setStatus(HttpStatus.NOT_FOUND.value());
     }
 }

@@ -1,5 +1,7 @@
 package com.zenroku.financial.records.api.app.transactionhistory.entity;
 
+import com.zenroku.financial.records.api.app.transactionhistory.model.ActionType;
+import com.zenroku.financial.records.api.app.transactionhistory.model.ActionTypeConverter;
 import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
 import com.zenroku.financial.records.api.settings.model.BaseEntity;
 import jakarta.persistence.*;
@@ -24,7 +26,11 @@ public class TransactionHistory extends BaseEntity {
     @Column(name = "description", columnDefinition = "text")
     String description;
 
-    @NotNull
+    @NotBlank(message = "actionType is required value 'Debit' or 'Credit'")
+    @Convert(converter = ActionTypeConverter.class)
+    ActionType actionType;
+
+    @NotNull(message = "balance cannot be null")
     @Column(name = "balance")
     Long balance;
 }

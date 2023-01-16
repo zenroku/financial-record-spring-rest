@@ -2,7 +2,7 @@ package com.zenroku.financial.records.api.app.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
-import com.zenroku.financial.records.api.settings.customconstraint.annotation.UniqueEmail;
+import com.zenroku.financial.records.api.settings.customconstraint.uniqueemail.UniqueEmail;
 import com.zenroku.financial.records.api.settings.model.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

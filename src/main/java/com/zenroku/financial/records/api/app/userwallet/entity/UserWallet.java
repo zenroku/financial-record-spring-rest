@@ -1,4 +1,4 @@
-package com.zenroku.financial.records.api.app.user_wallet.entity;
+package com.zenroku.financial.records.api.app.userwallet.entity;
 
 import com.zenroku.financial.records.api.app.user.entity.User;
 import com.zenroku.financial.records.api.app.wallet.entity.Wallet;

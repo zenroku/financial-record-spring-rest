@@ -1,6 +1,6 @@
-package com.zenroku.financial.records.api.app.transaction_history.entity;
+package com.zenroku.financial.records.api.app.transactionhistory.entity;
 
-import com.zenroku.financial.records.api.app.user_wallet.entity.UserWallet;
+import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
 import com.zenroku.financial.records.api.settings.model.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

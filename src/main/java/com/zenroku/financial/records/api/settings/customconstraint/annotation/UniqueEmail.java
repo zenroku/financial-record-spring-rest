@@ -1,6 +1,6 @@
-package com.zenroku.financial.records.api.settings.custom_constraint.annotation;
+package com.zenroku.financial.records.api.settings.customconstraint.annotation;
 
-import com.zenroku.financial.records.api.settings.custom_constraint.validator.UniqueEmailValidator;
+import com.zenroku.financial.records.api.settings.customconstraint.validator.UniqueEmailValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

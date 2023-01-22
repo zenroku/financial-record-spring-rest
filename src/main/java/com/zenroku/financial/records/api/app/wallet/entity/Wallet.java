@@ -1,15 +1,13 @@
 package com.zenroku.financial.records.api.app.wallet.entity;
 
 import com.zenroku.financial.records.api.settings.model.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
-import jakarta.validation.constraints.NotBlank;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Collection;
 
 @Setter
 @Getter

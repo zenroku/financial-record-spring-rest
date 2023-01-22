@@ -3,7 +3,6 @@ package com.zenroku.financial.records.api.app.user.controller;
 import com.zenroku.financial.records.api.app.user.entity.User;
 import com.zenroku.financial.records.api.app.user.service.UserService;
 import com.zenroku.financial.records.api.settings.constant.Route;
-import com.zenroku.financial.records.api.settings.exception.DataNotFoundException;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import org.springframework.beans.factory.annotation.Autowired;

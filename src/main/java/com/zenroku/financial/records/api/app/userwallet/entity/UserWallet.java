@@ -5,10 +5,12 @@ import com.zenroku.financial.records.api.app.user.entity.User;
 import com.zenroku.financial.records.api.app.userwallet.constraint.uniqwalletperuser.UniqWalletPerUser;
 import com.zenroku.financial.records.api.app.wallet.entity.Wallet;
 import com.zenroku.financial.records.api.settings.model.BaseEntity;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Setter
 @Getter
@@ -30,8 +32,8 @@ public class UserWallet extends BaseEntity {
     Wallet walletRelations;
 
     @NotNull(message = "balance cannot be null")
-    @Column(name = "balance")
-    Long balance;
+    @Column(name = "balance", columnDefinition = "double precision(15,0) default 0")
+    BigDecimal balance;
 
     @Transient
     Long userId;

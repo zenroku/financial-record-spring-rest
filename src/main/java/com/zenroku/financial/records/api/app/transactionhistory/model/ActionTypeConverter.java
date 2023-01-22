@@ -1,7 +1,7 @@
 package com.zenroku.financial.records.api.app.transactionhistory.model;
 
-import jakarta.persistence.AttributeConverter;
-import jakarta.persistence.Converter;
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
 @Converter(autoApply = true)
 public class ActionTypeConverter implements AttributeConverter<ActionType,String> {
@@ -17,6 +17,6 @@ public class ActionTypeConverter implements AttributeConverter<ActionType,String
                 return value;
             }
         }
-        throw new IllegalArgumentException("Unknown value: " + s);
+        throw new IllegalArgumentException("Unknown value: " + s + " pleas provide Debit or Credit");
     }
 }

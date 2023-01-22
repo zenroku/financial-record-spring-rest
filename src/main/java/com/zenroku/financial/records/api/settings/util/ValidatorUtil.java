@@ -1,7 +1,7 @@
 package com.zenroku.financial.records.api.settings.util;
 
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
-import jakarta.validation.ConstraintViolation;
+import javax.validation.ConstraintViolation;
 import org.springframework.http.HttpStatus;
 
 import java.util.Set;

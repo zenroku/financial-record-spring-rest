@@ -2,8 +2,8 @@ package com.zenroku.financial.records.api.app.userwallet.constraint.uniqwalletpe
 
 import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
 import com.zenroku.financial.records.api.app.userwallet.repository.UserWalletRepository;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
 import com.zenroku.financial.records.api.settings.customconstraint.uniqueemail.UniqueEmail;
 import com.zenroku.financial.records.api.settings.model.BaseEntity;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 

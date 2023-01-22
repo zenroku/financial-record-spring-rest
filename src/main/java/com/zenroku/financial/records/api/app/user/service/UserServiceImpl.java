@@ -7,10 +7,11 @@ import com.zenroku.financial.records.api.settings.exception.DataNotFoundExceptio
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import com.zenroku.financial.records.api.settings.util.ValidatorUtil;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public BaseResponse getById(Long id) throws DataNotFoundException {
         BaseResponse response = new BaseResponse();
         User getUser = userRepository.findById(id).orElseThrow(()-> new DataNotFoundException("User Not Found with id " + id));

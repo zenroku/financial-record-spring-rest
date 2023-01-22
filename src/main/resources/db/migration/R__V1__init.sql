@@ -3,8 +3,10 @@ drop table if exists public.user_wallet;
 drop table if exists public."user";
 drop table if exists public.wallet;
 
+CREATE SEQUENCE user_id_seq;
+
 create table if not exists public."user" (
-    id serial primary key,
+    id bigint primary key default nextval('user_id_seq'),
     first_name varchar(255) not null,
     last_name varchar(255) null,
     email varchar(50) not null,
@@ -14,8 +16,10 @@ create table if not exists public."user" (
     CONSTRAINT user_unique UNIQUE (email)
 );
 
+CREATE SEQUENCE wallet_id_seq;
+
 create table if not exists public.wallet (
-    id serial primary key,
+    id bigint primary key default nextval('wallet_id_seq'),
     name varchar(255) not null,
     created_datetime timestamp default now(),
     updated_datetime timestamp default now(),
@@ -27,21 +31,28 @@ insert into wallet (name) values ('BCA');
 insert into wallet (name) values ('BSI');
 insert into wallet (name) values ('OVO');
 
+CREATE SEQUENCE user_wallet_id_seq;
+
 create table if not exists public.user_wallet (
-    id serial primary key,
-    user_id serial not null references public.user(id),
-    wallet_id serial not null references public.wallet(id),
-    balance bigint not null default 0,
+    id bigint primary key default nextval('user_wallet_id_seq'),
+    user_id bigint not null references public.user(id),
+    wallet_id bigint not null references public.wallet(id),
+    balance numeric(38,2) default 0,
     created_datetime timestamp default now(),
     updated_datetime timestamp default now()
 );
 
+CREATE SEQUENCE transaction_history_id_seq;
+
 create table if not exists public.transaction_history (
-    id serial primary key,
-    user_wallet_id serial not null references public.user_wallet(id),
+    id bigint primary key default nextval('transaction_history_id_seq'),
+    user_wallet_id bigint not null references public.user_wallet(id),
     action_type varchar(10) not null,
     description text not null,
-    balance bigint not null,
+    current_balance numeric(38,2) default 0,
+    action_balance numeric(38,2) default 0,
+    result_balance numeric(38,2) default 0,
     created_datetime timestamp default now(),
     updated_datetime timestamp default now()
 );
+

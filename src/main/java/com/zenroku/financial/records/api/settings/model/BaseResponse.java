@@ -1,6 +1,6 @@
 package com.zenroku.financial.records.api.settings.model;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 

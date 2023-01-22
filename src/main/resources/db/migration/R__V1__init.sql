@@ -3,6 +3,11 @@ drop table if exists public.user_wallet;
 drop table if exists public."user";
 drop table if exists public.wallet;
 
+DROP SEQUENCE if exists user_id_seq;
+DROP SEQUENCE if exists wallet_id_seq;
+DROP SEQUENCE if exists user_wallet_id_seq;
+DROP SEQUENCE if exists transaction_history_id_seq;
+
 CREATE SEQUENCE user_id_seq;
 
 create table if not exists public."user" (
@@ -52,6 +57,7 @@ create table if not exists public.transaction_history (
     current_balance numeric(38,2) default 0,
     action_balance numeric(38,2) default 0,
     result_balance numeric(38,2) default 0,
+    transaction_datetime timestamp default null,
     created_datetime timestamp default now(),
     updated_datetime timestamp default now()
 );

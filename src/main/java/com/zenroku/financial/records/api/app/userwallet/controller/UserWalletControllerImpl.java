@@ -8,6 +8,8 @@ import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping(Route.userWallet)
 public class UserWalletControllerImpl implements UserWalletController{
@@ -15,7 +17,7 @@ public class UserWalletControllerImpl implements UserWalletController{
     UserWalletService userWalletService;
     @Override
     @GetMapping
-    public BaseResponseArray get() throws Exception {
+    public BaseResponseArray get(HttpServletRequest request) throws Exception {
         return userWalletService.get();
     }
 

@@ -8,6 +8,8 @@ import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping(Route.userPath)
 public class UserControllerImpl implements UserController{
@@ -16,7 +18,7 @@ public class UserControllerImpl implements UserController{
     UserService userService;
     @Override
     @GetMapping
-    public BaseResponseArray get() throws Exception {
+    public BaseResponseArray get(HttpServletRequest request) throws Exception {
         return userService.get();
     }
 

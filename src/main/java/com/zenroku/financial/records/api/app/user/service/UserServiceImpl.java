@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zenroku.financial.records.api.app.user.entity.User;
 import com.zenroku.financial.records.api.app.user.repository.UserRepository;
 import com.zenroku.financial.records.api.settings.exception.DataNotFoundException;
+import com.zenroku.financial.records.api.settings.model.BaseRequest;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import com.zenroku.financial.records.api.settings.util.ValidatorUtil;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,10 +29,17 @@ public class UserServiceImpl implements UserService{
     @Autowired
     Validator validator;
     @Override
-    public BaseResponseArray get() {
+    public BaseResponseArray get(BaseRequest request) throws Exception {
         BaseResponseArray response = new BaseResponseArray();
-        List<User> userList = userRepository.findAll();
-        response.setData(userList);
+        Page<User> page = userRepository.findAll(request.getPageable());
+        response.setData(page.getContent());
+
+        response.setProperties(
+                page.getPageable().getPageNumber(),
+                page.getContent().size(),
+                page.getTotalElements(),
+                page.getTotalPages()
+        );
         return response;
     }
 

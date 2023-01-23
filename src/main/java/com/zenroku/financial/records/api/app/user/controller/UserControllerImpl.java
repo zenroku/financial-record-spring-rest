@@ -20,7 +20,7 @@ public class UserControllerImpl implements UserController{
     @Override
     @GetMapping
     public BaseResponseArray get(HttpServletRequest servletRequest, BaseRequest request) throws Exception {
-        return userService.get();
+        return userService.get(request);
     }
 
     @Override

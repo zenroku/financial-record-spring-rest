@@ -32,7 +32,7 @@ public class WalletControllerImpl implements WalletController{
     @Override
     @GetMapping
     public BaseResponseArray get(HttpServletRequest servletRequest, BaseRequest request) throws Exception {
-        return walletService.get();
+        return walletService.get(request);
     }
 
     @Override

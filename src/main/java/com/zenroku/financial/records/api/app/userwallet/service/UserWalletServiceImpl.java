@@ -8,6 +8,7 @@ import com.zenroku.financial.records.api.app.userwallet.repository.UserWalletRep
 import com.zenroku.financial.records.api.app.wallet.entity.Wallet;
 import com.zenroku.financial.records.api.app.wallet.repository.WalletRepository;
 import com.zenroku.financial.records.api.settings.exception.DataNotFoundException;
+import com.zenroku.financial.records.api.settings.model.BaseRequest;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import com.zenroku.financial.records.api.settings.util.ValidatorUtil;
@@ -15,6 +16,7 @@ import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,10 +40,17 @@ public class UserWalletServiceImpl implements UserWalletService{
     Validator validator;
 
     @Override
-    public BaseResponseArray get() {
+    public BaseResponseArray get(BaseRequest request) throws Exception {
         BaseResponseArray response = new BaseResponseArray();
-        List<UserWallet> userWalletList = userWalletRepository.findAll();
-        response.setData(userWalletList);
+        Page<UserWallet> page = userWalletRepository.findAll(request.getPageable());
+        response.setData(page.getContent());
+
+        response.setProperties(
+                page.getPageable().getPageNumber(),
+                page.getContent().size(),
+                page.getTotalElements(),
+                page.getTotalPages()
+        );
         return response;
     }
 

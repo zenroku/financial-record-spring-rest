@@ -19,7 +19,7 @@ public class UserWalletControllerImpl implements UserWalletController{
     @Override
     @GetMapping
     public BaseResponseArray get(HttpServletRequest servletRequest, BaseRequest request) throws Exception {
-        return userWalletService.get();
+        return userWalletService.get(request);
     }
 
     @Override

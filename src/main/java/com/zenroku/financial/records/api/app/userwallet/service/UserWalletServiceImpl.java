@@ -41,7 +41,7 @@ public class UserWalletServiceImpl implements UserWalletService{
     public BaseResponseArray get() {
         BaseResponseArray response = new BaseResponseArray();
         List<UserWallet> userWalletList = userWalletRepository.findAll();
-        response.setDatas(userWalletList);
+        response.setData(userWalletList);
         return response;
     }
 

@@ -13,6 +13,4 @@ public class AbstractResponse implements Serializable {
     private Boolean success = true;
 
     private Integer status = 200;
-
-    private String message;
 }

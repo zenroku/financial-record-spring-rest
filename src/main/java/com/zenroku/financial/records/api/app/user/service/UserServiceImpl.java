@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
     public BaseResponseArray get() {
         BaseResponseArray response = new BaseResponseArray();
         List<User> userList = userRepository.findAll();
-        response.setDatas(userList);
+        response.setData(userList);
         return response;
     }
 

@@ -3,6 +3,7 @@ package com.zenroku.financial.records.api.app.userwallet.controller;
 import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
 import com.zenroku.financial.records.api.app.userwallet.service.UserWalletService;
 import com.zenroku.financial.records.api.settings.constant.Route;
+import com.zenroku.financial.records.api.settings.model.BaseRequest;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class UserWalletControllerImpl implements UserWalletController{
     UserWalletService userWalletService;
     @Override
     @GetMapping
-    public BaseResponseArray get(HttpServletRequest request) throws Exception {
+    public BaseResponseArray get(HttpServletRequest servletRequest, BaseRequest request) throws Exception {
         return userWalletService.get();
     }
 

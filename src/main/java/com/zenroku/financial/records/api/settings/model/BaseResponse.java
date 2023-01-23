@@ -11,4 +11,6 @@ import java.util.Map;
 @Embeddable
 public class BaseResponse extends AbstractResponse{
     Map<String,?> data;
+
+    String message;
  }

@@ -3,6 +3,7 @@ package com.zenroku.financial.records.api.app.transactionhistory.controller;
 import com.zenroku.financial.records.api.app.transactionhistory.entity.TransactionHistory;
 import com.zenroku.financial.records.api.app.transactionhistory.service.TransactionHistoryService;
 import com.zenroku.financial.records.api.settings.constant.Route;
+import com.zenroku.financial.records.api.settings.model.BaseRequest;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,9 @@ public class TransactionHistoryControllerImpl implements TransactionHistoryContr
     }
 
     @Override
-    public BaseResponseArray get(HttpServletRequest request) throws Exception {
-        return null;
+    @GetMapping
+    public BaseResponseArray get(HttpServletRequest servletRequest, BaseRequest request) throws Exception {
+        return transactionHistoryService.get(request);
     }
 
     @Override

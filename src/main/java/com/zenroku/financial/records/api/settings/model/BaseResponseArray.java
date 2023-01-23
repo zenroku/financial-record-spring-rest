@@ -10,5 +10,20 @@ import java.util.Collection;
 @Setter
 @Embeddable
 public class BaseResponseArray extends AbstractResponse{
-    Collection<?> datas;
+    Collection<?> data;
+
+    Integer page;
+
+    Integer limit;
+
+    Long totalData;
+
+    Integer totalPage;
+
+    public void setProperties(Integer page,Integer limit, Long totalData, Integer totalPage){
+        this.setPage(page);
+        this.setLimit(limit);
+        this.setTotalData(totalData);
+        this.setTotalPage(totalPage);
+    }
 }

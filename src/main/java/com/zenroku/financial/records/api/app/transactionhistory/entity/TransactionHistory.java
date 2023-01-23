@@ -12,6 +12,8 @@ import com.zenroku.financial.records.api.settings.model.BaseEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,6 +55,7 @@ public class TransactionHistory extends BaseEntity {
     private LocalDateTime transactionDatetime;
 
     @Transient
+    @Getter(AccessLevel.NONE)
     @NotNull(message = "useWalletId cannot be null")
     Long userWalletId;
 

@@ -29,7 +29,7 @@ public class WalletServiceImpl implements WalletService{
     public BaseResponseArray get() {
         BaseResponseArray response = new BaseResponseArray();
         List<Wallet> walletList = walletRepository.findAll();
-        response.setDatas(walletList);
+        response.setData(walletList);
         return response;
     }
 

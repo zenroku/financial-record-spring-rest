@@ -3,6 +3,7 @@ package com.zenroku.financial.records.api.app.user.controller;
 import com.zenroku.financial.records.api.app.user.entity.User;
 import com.zenroku.financial.records.api.app.user.service.UserService;
 import com.zenroku.financial.records.api.settings.constant.Route;
+import com.zenroku.financial.records.api.settings.model.BaseRequest;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserControllerImpl implements UserController{
     UserService userService;
     @Override
     @GetMapping
-    public BaseResponseArray get(HttpServletRequest request) throws Exception {
+    public BaseResponseArray get(HttpServletRequest servletRequest, BaseRequest request) throws Exception {
         return userService.get();
     }
 

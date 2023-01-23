@@ -8,10 +8,12 @@ import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
 import com.zenroku.financial.records.api.app.userwallet.repository.UserWalletRepository;
 import com.zenroku.financial.records.api.settings.exception.ApiException;
 import com.zenroku.financial.records.api.settings.exception.DataNotFoundException;
+import com.zenroku.financial.records.api.settings.model.BaseRequest;
 import com.zenroku.financial.records.api.settings.model.BaseResponse;
 import com.zenroku.financial.records.api.settings.model.BaseResponseArray;
 import com.zenroku.financial.records.api.settings.util.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,7 +86,20 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService{
     }
 
     @Override
-    public BaseResponseArray getByUser(Long userId) {
-        return null;
+    public BaseResponseArray get(BaseRequest request) throws Exception {
+        BaseResponseArray response = new BaseResponseArray();
+        Page<TransactionHistory> page = transactionHistoryRepository.findAll(
+                request.getPageable()
+        );
+
+        response.setData(page.getContent());
+
+        response.setProperties(
+                page.getPageable().getPageNumber(),
+                page.getContent().size(),
+                page.getTotalElements(),
+                page.getTotalPages()
+                );
+        return response;
     }
 }

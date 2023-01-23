@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zenroku.financial.records.api.app.transactionhistory.entity.TransactionHistory;
 import com.zenroku.financial.records.api.app.transactionhistory.model.ActionType;
 import com.zenroku.financial.records.api.app.transactionhistory.repository.TransactionHistoryRepository;
+import com.zenroku.financial.records.api.app.transactionhistory.specification.TransactionHistorySpecificationBuilder;
 import com.zenroku.financial.records.api.app.userwallet.entity.UserWallet;
 import com.zenroku.financial.records.api.app.userwallet.repository.UserWalletRepository;
 import com.zenroku.financial.records.api.settings.exception.ApiException;
@@ -89,6 +90,7 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService{
     public BaseResponseArray get(BaseRequest request) throws Exception {
         BaseResponseArray response = new BaseResponseArray();
         Page<TransactionHistory> page = transactionHistoryRepository.findAll(
+                new TransactionHistorySpecificationBuilder().build(request),
                 request.getPageable()
         );
 

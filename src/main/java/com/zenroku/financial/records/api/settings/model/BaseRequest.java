@@ -22,6 +22,12 @@ public class BaseRequest implements Serializable {
 
     JSONArray sort;
 
+    JSONArray filters;
+
+    JSONArray searchFields;
+
+    String search;
+
     @JsonIgnore
     Pageable pageable;
 
